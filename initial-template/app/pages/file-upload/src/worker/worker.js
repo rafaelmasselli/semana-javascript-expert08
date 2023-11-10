@@ -1,6 +1,7 @@
 import CanvasRenderer from "./canvasRender.js";
 import MP4Demuxer from "./mp4Demuxer.js";
 import VideoProcessor from "./videoProcessor.js";
+import WebMWriter from './../deps/webm-writer2.js'
 
 const qvgaConstraints = {
   width: 320,
@@ -31,8 +32,15 @@ const encoderConfig = {
 };
 
 const mp4Demuxer = new MP4Demuxer();
+const webmWriterConfig = {
+  codec: "VP9",
+  width: encoderConfig.width,
+  height: encoderConfig.height,
+  bitrate: encoderConfig.bitrate,
+};
 const videoProcessor = new VideoProcessor({
   mp4Demuxer,
+  webMWriter: new WebMWriter(webmWriterConfig),
 });
 
 onmessage = async ({ data }) => {
