@@ -18,7 +18,7 @@ const hdConstraints = {
 };
 
 const encoderConfig = {
-  ...qvgaConstraints,
+  ...hdConstraints,
   bitrate: 10e6,
   // WebM
   codec: "vp09.00.10.08",
@@ -55,9 +55,7 @@ onmessage = async ({ data }) => {
     renderFrame,
     encoderConfig,
     sendMessage: (message) => {
-      self.postMessage(message)
-  }
+      self.postMessage(message);
+    },
   });
-
-
 };

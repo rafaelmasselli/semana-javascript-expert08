@@ -1,79 +1,60 @@
 <!DOCTYPE html>
-<html>
-
-<head>
-  <title>JSExpert Hub</title>
-  <link rel="stylesheet" href="./../_globals/globals.css" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-
-<body>
-  <div class="desktop">
-    <div class="div">
-      <div class="overlap">
-        <div class="div-headerwrapper">
-          <div class="div-headercontainer">
-            <div class="div-logo-wrapper">
-              <div class="div-logo">
-                <img class="button-desktop" src="img/button-desktop-navigation.svg" />
-                <div class="group">
-                  <div class="frame">
-                    <a href="/pages/home">
-                      <div class="text-wrapper">JS Expert</div>
-                    </a>
-                    <div class="div-wrapper">
-                      <div class="text-wrapper-2">hub</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../_globals/globals.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <header class="navbar">
+      <nav class="navbar__container">
+        <a href="../home/">
+          <div class="navbar__container style__title">
+            <div>
+              <h1 class="JS">JS Expert</h1>
             </div>
-            <div class="form-fieldset-wrapper">
-              <div class="form-fieldset">
-                <div class="div-2">
-                  <div class="button-pesquisa">
-                    <img class="iconamoon-search" src="img/iconamoon-search-light-1.svg" />
-                    <div class="pseudo">
-                      <div class="icon"></div>
-                    </div>
-                  </div>
-                  <div class="label">
-                    <div class="input-search">
-                      <div class="div-placeholder">
-                        <div class="text-wrapper-3">Busca jsexperthub</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="hub__container">
+              <h1 class="hub">hub</h1>
             </div>
           </div>
+        </a>
+      </nav>
+      <nav class="navbar__container icons__upload__and__profile">
+        <div class="icons__container">
+          <a href="../file-upload/">
+            <img
+              src="./img/div-uploadbtncontent.svg"
+              alt="dois botoes para fazer upload do video ou da foto"
+            />
+          </a>
+          <a href="/pages/file-upload">
+            <img src="./img/link.svg" alt="icon do perfil default do usuário" />
+          </a>
         </div>
-        <img class="link" src="img/link.svg" />
-      </div>
+      </nav>
+    </header>
+    <main class="main__container">
       <div class="frame-2">
         <div class="frame-wrapper">
           <div id="fileUploadWrapper" class="frame-3">
-            <div class="rectangle"></div>
-            <div class="group-2">
-              <div class="overlap-group">
-                <!-- input type=file only for mp4 hidden -->
-                <input type="file" id="fileUpload" class="hide" accept="video/mp4" />
-                <div id="btnUploadVideos" class="text-wrapper-4">Select Videos to Upload</div>
+            <div class="rectangle">
+              <div class="group-2 container">
+                <img class="img" src="img/group-17-1.png" />
+                <div class="overlap-group container">
+                  <input type="file" id="fileUpload" class="hide" accept="video/mp4" />
+                  <div id="btnUploadVideos" class="text-wrapper-4">Select Videos to Upload</div>
+                </div>
               </div>
-              <img class="img" src="img/group-17-1.png" />
             </div>
           </div>
         </div>
         <div id="fileInfo" class="hide frame-4">
-          <!-- <div id="fileInfo" class="frame-4"> -->
           <div class="frame-5">
             <div id="fileName" class="text-wrapper-5">Video.mp4</div>
             <div id="fileSize" class="text-wrapper-6">1.19 GB</div>
-
-
-            <canvas id="preview-144p"></canvas>
-
+            <canvas id="preview-144p" class="video__canvas"></canvas>
             <p class="p">
               <span id="elapsed">Process started 0 secs ago</span> <br>
             </p>
@@ -81,24 +62,22 @@
           <div class="frame-6">
             <div class="rectangle-3"></div>
           </div>
-          <img class="line" src="img/line-1.svg" />
-        </div>
-
-      </div>
-
-      <div class="frame-7">
-        <div class="frame-8">
-          <div class="text-wrapper-7">JS Expert</div>
-          <div class="frame-9">
-            <div class="text-wrapper-2">hub</div>
-          </div>
+          <span class="line" ></span>
         </div>
       </div>
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/mp4box@0.5.2/dist/mp4box.all.min.js"></script>
-  <script src="./src/app.js" type="module"></script>
-</body>
-
+  </main>
+    <footer class="container__footer">
+      <div class="navbar__container style__title__footer">
+        <div class="footer__box">
+          <h2 class="JS__footer">JS Expert</h2>
+        </div>
+        <div class="hub__container">
+          <h2 class="hub__footer">hub</h2>
+        </div>
+      </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/mp4box@0.5.2/dist/mp4box.all.min.js"></script>
+    <script src="./src/app.js" type="module"></script>
+  </body>
 </html>
