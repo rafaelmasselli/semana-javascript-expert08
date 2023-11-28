@@ -352,8 +352,10 @@ progress {
 }
 
 
-@media (min-height: 1366px){
+@media (min-height: 1144px){
   .main__container{
     margin: 380px 0;
   }
 }
+
+

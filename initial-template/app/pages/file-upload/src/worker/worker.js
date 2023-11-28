@@ -3,6 +3,7 @@ import MP4Demuxer from "./mp4Demuxer.js";
 import VideoProcessor from "./videoProcessor.js";
 import WebMWriter from "./../deps/webm-writer2.js";
 import Service from "./service.js";
+import typeResolution from "../utils/responsiveResolution.js";
 
 const qvgaConstraints = {
   width: 320,
@@ -26,10 +27,15 @@ const encoderConfig = {
   hardwareAcceleration: "prefer-software",
 
   // MP4
-  // codec: 'avc1.42002A',
+  // codec: "avc1.42002A",
   // pt: 1,
-  // hardwareAcceleration: 'prefer-hardware',
-  // avc: { format: 'annexb' }
+  // hardwareAcceleration: "prefer-hardware",
+  // avc: { format: "annexb" },
+};
+
+const videoSetting = {
+  typeFile: "mp4",
+  resolution: typeResolution(encoderConfig.width, encoderConfig.height),
 };
 
 const mp4Demuxer = new MP4Demuxer();
@@ -49,11 +55,16 @@ const videoProcessor = new VideoProcessor({
 });
 
 onmessage = async ({ data }) => {
+  const typeFile = videoSetting.typeFile;
+  const resolution = videoSetting.resolution;
+
   const renderFrame = CanvasRenderer.getRenderer(data.canvas);
   await videoProcessor.start({
     file: data.file,
     renderFrame,
     encoderConfig,
+    resolution,
+    typeFile,
     sendMessage: (message) => {
       self.postMessage(message);
     },

@@ -1,3 +1,5 @@
+import typeResolution from "../utils/responsiveResolution.js";
+
 export default class VideoProcessor {
   #mp4Demuxer;
   #webMWriter;
@@ -49,7 +51,7 @@ export default class VideoProcessor {
     });
   }
 
-  enconde144p(encoderConfig) {
+  enconde(encoderConfig) {
     let _encoder;
     const readable = new ReadableStream({
       start: async (controller) => {
@@ -57,7 +59,7 @@ export default class VideoProcessor {
           encoderConfig
         );
         if (!supported) {
-          const message = "enconde144p VideoEncoder config not supported!";
+          const message = "enconde VideoEncoder config not supported!";
           console.error(message, encoderConfig);
           controller.error(message);
           return;
@@ -81,7 +83,13 @@ export default class VideoProcessor {
             controller.enqueue(frame);
           },
           error: (err) => {
-            console.error("VideoEncoder 144p", err);
+            console.error(
+              `VideoEncoder ${typeResolution(
+                encoderConfig.width,
+                encoderConfig.height
+              )}`,
+              err
+            );
             controller.error(err);
           },
         });
@@ -185,11 +193,18 @@ export default class VideoProcessor {
       },
     });
   }
-  async start({ file, encoderConfig, renderFrame, sendMessage }) {
+  async start({
+    file,
+    encoderConfig,
+    renderFrame,
+    typeFile,
+    resolution,
+    sendMessage,
+  }) {
     const stream = file.stream();
     const fileName = file.name.split("/").pop().replace(".mp4", "");
     await this.mp4Decoder(stream)
-      .pipeThrough(this.enconde144p(encoderConfig))
+      .pipeThrough(this.enconde(encoderConfig))
       .pipeThrough(this.renderDecodedFramesAndGetEncodedChunks(renderFrame))
       .pipeThrough(this.transformIntoWebM())
       // .pipeThrough(
@@ -208,7 +223,7 @@ export default class VideoProcessor {
       //         }
       //     })
       // )
-      .pipeTo(this.upload(fileName, "144p", "webm"));
+      .pipeTo(this.upload(fileName, resolution, typeFile));
 
     sendMessage({
       status: "done",
