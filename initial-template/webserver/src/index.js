@@ -2,8 +2,8 @@ import http from "node:http";
 import fs from "node:fs/promises";
 import { join } from "node:path";
 import url from "node:url";
-import Routes from "./routes.js";
-import { logger } from "./util.js";
+import Routes from "./routes/index.routes.js";
+import { logger } from "./utils/util.js";
 const PORT = 3000;
 
 const dirName = url.fileURLToPath(new URL(import.meta.url));
