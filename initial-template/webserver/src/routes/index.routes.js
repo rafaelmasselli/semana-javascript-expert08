@@ -1,12 +1,15 @@
 import url from "url";
 import UploadHandler from "../controller/uploadHandler.js";
+import VideoConcatenator from "../controller/concatVideos.js";
 import { logger } from "../utils/util.js";
 import { pipeline } from "node:stream/promises";
 
 export default class Routes {
   #downloadsFolder;
-  constructor({ downloadsFolder }) {
+  #outputFilePath;
+  constructor({ downloadsFolder, outputFilePath }) {
     this.#downloadsFolder = downloadsFolder;
+    this.#outputFilePath = outputFilePath;
   }
   async options(request, response) {
     console.log("passou options");
@@ -18,6 +21,14 @@ export default class Routes {
   }
 
   get(request, response) {
+    const inputFolderPath = this.#downloadsFolder;
+    const outputFilePath = this.#outputFilePath;
+
+    const videoConcatenator = new VideoConcatenator(
+      inputFolderPath,
+      outputFilePath
+    );
+    videoConcatenator.concatVideos();
     response.writeHead(200, { Connection: "close" });
     response.end(`
             <html>
@@ -36,6 +47,7 @@ export default class Routes {
     const redirectTo = headers.origin;
     const uploadHandler = new UploadHandler({
       downloadsFolder: this.#downloadsFolder,
+      outputFilePath: this.#outputFilePath,
     });
 
     const onFinish = (response, redirectTo) => () => {

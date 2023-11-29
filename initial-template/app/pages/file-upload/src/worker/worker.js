@@ -19,18 +19,18 @@ const hdConstraints = {
 };
 
 const encoderConfig = {
-  ...hdConstraints,
+  ...qvgaConstraints,
   bitrate: 10e6,
   // WebM
-  codec: "vp09.00.10.08",
-  pt: 4,
-  hardwareAcceleration: "prefer-software",
+  // codec: "vp09.00.10.08",
+  // pt: 4,
+  // hardwareAcceleration: "prefer-software",
 
   // MP4
-  // codec: "avc1.42002A",
-  // pt: 1,
-  // hardwareAcceleration: "prefer-hardware",
-  // avc: { format: "annexb" },
+  codec: "avc1.42002A",
+  pt: 1,
+  hardwareAcceleration: "prefer-hardware",
+  avc: { format: "annexb" },
 };
 
 const videoSetting = {

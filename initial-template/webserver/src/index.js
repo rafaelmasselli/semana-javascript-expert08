@@ -9,11 +9,13 @@ const PORT = 3000;
 const dirName = url.fileURLToPath(new URL(import.meta.url));
 
 const downloadsFolder = join(dirName, "../../", "downloads");
+const outputFilePath = join(dirName, "../../", "videos");
 
 const handler = function (request, response) {
   const defaultRoute = async (request, response) => response.end("Hello!");
   const routes = new Routes({
     downloadsFolder,
+    outputFilePath,
   });
   const chosen = routes[request.method.toLowerCase()] || defaultRoute;
 
